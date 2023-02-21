@@ -1,0 +1,18 @@
+ion-header{
+    margin-top: -20px;
+}
+
+.cabecera{
+    margin-top: 20px;
+
+}
+
+.facebook{
+    margin-left: 12px;
+}
+
+ion-card{
+    margin-bottom: 40px;
+    width: 300px;
+    height: auto;
+}
