@@ -1,7 +1,11 @@
 ion-header{
-    
+    margin-top: 20px;
 }
 
-ion-toolbar{
+ion-title{
     margin-top: 20px;
+}
+
+.toolbar{
+    margin-top: 0px;
 }

@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { IonHeader, IonToolbar, IonContent, IonTitle, IonButton, IonList, IonItem, IonLabel, IonInput, IonCard, IonCardContent, IonSlide, IonSlides, IonCardHeader, IonCardTitle, IonCardSubtitle, IonImg, IonText, IonIcon, IonBackButton, IonRouterLink, IonToast, IonNavLink} from '@ionic/react'
 import {createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithRedirect, signOut} from 'firebase/auth'
 import {auth} from '../firebaseConfig';
+import './PaginaLogin.css'
 
 export const PaginaLogin = () => {
 
@@ -15,7 +16,7 @@ export const PaginaLogin = () => {
         try{
           const user =  await signInWithEmailAndPassword(auth, LoginEmail, LoginPassword);
           console.log(user);
-          window.open("/home");
+          window.location.href = "/Logueado"
         } catch (error){
             console.log(error);
         }
@@ -32,10 +33,13 @@ export const PaginaLogin = () => {
             </IonToolbar>
         </IonHeader>
         <IonContent>
-            <IonTitle>
-                ¡Unete a PelisPop!
-            </IonTitle>
+            <IonSlides>
+                <IonSlide className="primerSlide">
+                        <IonImg src="https://img.freepik.com/vector-premium/lindo-dibujo-palomitas-maiz-palomitas-maiz-bebida-lista-ver-peliculas-cine_214584-8068.jpg?w=2000" alt="The Wisconsin State Capitol building in Madison, WI at night"></IonImg>
+                </IonSlide>
+            </IonSlides>
                 <IonCard>
+                    <IonCardHeader> ¡Únete a PelisPop! </IonCardHeader>
                     <IonList>
                         <IonItem>
                                 <IonLabel position="floating">Email</IonLabel>
@@ -47,7 +51,7 @@ export const PaginaLogin = () => {
                         </IonItem>
                         <IonContent> ¿No tienes cuenta? Registrate aqui</IonContent>
                     </IonList>
-                    <IonButton expand="block" fill='outline' shape='round' onClick={() => login() }>Login con Correoito</IonButton>
+                    <IonButton expand="block" fill='outline' shape='round' onClick={() => login() }>Login con Correo</IonButton>
                 </IonCard>
         </IonContent>
     </>

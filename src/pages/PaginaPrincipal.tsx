@@ -1,15 +1,19 @@
 import React from 'react'
 import './PaginaPrincipal.css'
-import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithRedirect} from 'firebase/auth'
+import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithRedirect, signInWithPopup} from 'firebase/auth'
 import {auth} from '../firebaseConfig';
 import { IonHeader, IonToolbar, IonContent, IonTitle, IonButton, IonList, IonItem, IonLabel, IonInput, IonCard, IonCardContent, IonSlide, IonSlides, IonCardHeader, IonCardTitle, IonCardSubtitle, IonImg, IonText, IonIcon, IonPage} from '@ionic/react'
 import { mailOutline } from 'ionicons/icons'
 import { logoGoogle } from 'ionicons/icons'
-import { logoFacebook } from 'ionicons/icons'
 
-const googleSignIn=()=>{
+async function googleSignIn(){
+    try{
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+    await signInWithPopup(auth, provider);
+    window.location.href = "/Logueado"
+    }catch (error){
+
+    }
 };
 
 export const PaginaPrincipal = () => {
@@ -62,8 +66,7 @@ export const PaginaPrincipal = () => {
                     </IonCard>
                 </IonSlide>
             </IonSlides>
-                    <IonButton expand="block" fill='outline' shape='round' ><IonIcon icon={logoGoogle} slot="start"/>Login con Google</IonButton>
-                    <IonButton expand="block" fill='outline' shape='round'  routerLink='/Home'><IonIcon icon={logoFacebook} slot="start" className='facebook'/>Login con Facebook</IonButton>    
+                    <IonButton expand="block" fill='outline' shape='round' onClick={() => googleSignIn()} ><IonIcon icon={logoGoogle} slot="start"/>Login con Google</IonButton>
                     <IonButton expand="block" fill='outline' shape='round' routerLink='/PaginaLogin'><IonIcon icon={mailOutline} slot="start"/>Login con Correo</IonButton>
         </IonContent>
     </>

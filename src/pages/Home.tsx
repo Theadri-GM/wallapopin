@@ -1,7 +1,9 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonButton, IonText } from '@ionic/react';
+import { IonIcon, IonLabel, IonSegment, IonSegmentButton } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import { useEffect, useState } from 'react';
 import { Pelicula } from '../pages/Pelicula';
+import { call, heart, pin } from 'ionicons/icons';
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -26,20 +28,54 @@ useEffect(() => {
     if(evt.key=="Enter")
     {
       setUrl("http://www.omdbapi.com/?apikey=92042319&s="+busqueda);
-      setBusqueda(" ");
+      setBusqueda("");
+    }
+  }
+
+  // Categorias
+  const primeraCategoria = () =>
+    {
+      setUrl("http://www.omdbapi.com/?apikey=92042319&s=Marvel");
+      setBusqueda("");
     }
 
-  }
+    const segundaCategoria = () =>
+    {
+      setUrl("http://www.omdbapi.com/?apikey=92042319&s=accion");
+      setBusqueda("");
+    }
+
+    const terceraCategoria = () =>
+    {
+      setUrl("http://www.omdbapi.com/?apikey=92042319&s=juegos");
+      setBusqueda("");
+    }
 
   return (
     <>
       <IonHeader translucent={true}>
             <div className='barraBusqueda'>
               <IonToolbar>
-                <IonSearchbar animated={true} placeholder="Busca categoria" onIonChange={(e: any) => setBusqueda(e.target.value)} onKeyPress={busquedaPeliculas}></IonSearchbar>
-                
+                <IonTitle class="ion-text-center"> PelisPop </IonTitle>
+                <IonSearchbar animated={true} placeholder="Busca pelis!..." onIonChange={(e: any) => setBusqueda(e.target.value)} onKeyPress={busquedaPeliculas}></IonSearchbar>
               </IonToolbar>
             </div>
+            <IonToolbar class="toolbar">
+              <div>
+                <IonSegment value="heart">
+                  <IonButton onClick={() => primeraCategoria()}>
+                    <IonIcon icon={call}></IonIcon>
+                    <IonText></IonText>
+                  </IonButton>
+                  <IonButton onClick={() => segundaCategoria()}>
+                    <IonIcon icon={heart}></IonIcon>
+                  </IonButton>
+                  <IonButton onClick={() => terceraCategoria()}>
+                    <IonIcon icon={pin}></IonIcon>
+                  </IonButton>
+              </IonSegment>
+            </div>
+          </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
             <div className='contenedor'>
